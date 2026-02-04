@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Música Sencillo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        /* --- Contenedor principal que envuelve la imagen y el reproductor --- */
+        .main-content-wrapper {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1000px;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* --- Contenedor de la imagen de fondo --- */
+        .image-container {
+            flex-shrink: 0;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://todovaasalirbien.es/wp-content/uploads/2025/06/Chuso-Garcia_-Musica-Visible.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Contenedor del reproductor --- */
+        .player-container {
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        h1 {
+            color: #0d284a; /* Azul marino intenso del logo */
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .playlist-container {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #dddddd;
+            padding-top: 20px;
+        }
+        .song-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #dddddd;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .song-item:hover {
+            background-color: #f0f0f0;
+        }
+        .song-info {
+            display: flex; /* Para alinear la miniatura y la info */
+            align-items: center;
+            gap: 10px; /* Espacio entre miniatura y texto */
+            flex-grow: 1; /* Ocupa el espacio disponible */
+            text-align: left;
+        }
+        .song-thumbnail {
+            width: 40px; /* Tamaño de la miniatura */
+            height: 40px;
+            object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+            border-radius: 5px; /* Bordes redondeados para la miniatura */
+            flex-shrink: 0; /* Evita que la miniatura se encoja */
+        }
+        .song-title {
+            font-weight: bold;
+            display: block;
+            color: #fe9103; /* Naranja vibrante para los títulos de canción */
+            font-size: 1.1em;
+        }
+        .song-artist {
+            font-size: 0.9em;
+            color: #666666;
+            display: block;
+        }
+        /* Botones en la lista de canciones */
+        .song-item .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .song-item button {
+            background: none;
+            border: none;
+            color: #333333;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s ease;
+        }
+        .song-item button:hover {
+            color: #FFD700; /* Amarillo al pasar el ratón */
+        }
+        /* Estilos específicos para los botones de control de la lista */
+        .song-item .play-button.playing { /* Estilo cuando la canción se está reproduciendo desde la lista */
+            color: #FFD700; /* Amarillo cuando está sonando */
+        }
+
+        /* --- Controles del reproductor principal --- */
+        .player-controls {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dddddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        #current-song-info {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333333;
+        }
+        #audio-player {
+            display: none; /* Ocultamos el reproductor nativo */
+        }
+
+        /* Estilos para los controles principales */
+        .main-player-ui {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .custom-player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .custom-player-controls button {
+            background: none;
+            border: none;
+            color: #333333; /* Color oscuro para los botones */
+            font-size: 1.5em; /* Tamaño de los iconos */
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s ease;
+        }
+        .custom-player-controls button:hover {
+            color: #FFD700; /* Amarillo al pasar el ratón */
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: #cccccc;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #FFD700; /* Amarillo para la barra de progreso */
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        .time-info {
+            font-size: 0.8em;
+            color: #666666;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* --- Estilos para la sección de videos --- */
+        .videos-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #fe9103;
+        }
+
+        .videos-section h2 {
+            color: #0d284a;
+            margin-bottom: 20px;
+        }
+
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .video-item {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .video-info {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .video-title {
+            font-weight: bold;
+            color: #fe9103;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+
+        .video-description {
+            font-size: 0.85em;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .video-player {
+            display: none;
+            width: 100%;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: #333333;
+            font-size: 1.3em;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: color 0.2s ease;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 50px;
+        }
+
+        .video-controls button:hover {
+            color: #FFD700;
+            background-color: #eeeeee;
+        }
+
+        .video-item.playing .video-thumbnail {
+            opacity: 0.5;
+        }
+
+        .video-item.playing .video-title::before {
+            content: "▶ ";
+            color: #FFD700;
+        }
+
+        /* Media query para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .main-content-wrapper {
+                flex-direction: column; /* Apila los elementos verticalmente en pantallas pequeñas */
+                align-items: center; /* Centra los elementos apilados */
+                gap: 20px; /* Reduce el espacio entre elementos apilados */
+            }
+            .image-container {
+                width: 250px; /* Reduce el tamaño de la imagen en pantallas pequeñas */
+                height: 250px;
+            }
+            .player-container {
+                width: 100%; /* Ocupa todo el ancho disponible */
+            }
+            .container {
+                padding: 20px; /* Reduce el padding general en pantallas pequeñas */
+            }
+            .custom-player-controls button {
+                font-size: 1.2em; /* Reduce el tamaño de los botones en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Un contenedor principal que envuelve la imagen y el reproductor -->
+    <div class="main-content-wrapper">
+        <!-- Contenedor para la imagen de fondo -->
+        <div class="image-container"></div>
+
+        <!-- Contenedor para el reproductor y la lista de canciones -->
+        <div class="player-container">
+            <div class="container"> <!-- Mantengo el container para estilos internos del reproductor -->
+                <h1>Música para visibilizar lo invisible</h1>
+
+                <div class="playlist-container">
+                    <h2>Canciones Disponibles</h2>
+                    <div id="playlist">
+                        <!-- Las canciones se agregarán aquí con JavaScript -->
+                    </div>
+                </div>
+
+                <div class="player-controls">
+                    <div id="current-song-info">Selecciona una canción</div>
+                    <!-- Ocultamos los controles nativos del audio para usar los nuestros -->
+                    <audio id="audio-player" controls style="display: none;">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+
+                    <!-- Controles de audio principales -->
+                    <div class="main-player-ui">
+                        <div class="progress-bar-container" id="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        <div class="time-info">
+                            <span id="current-time">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                        <div class="custom-player-controls">
+                            <button id="prev-button">⏮</button>
+                            <button id="play-pause-button">▶</button>
+                            <button id="stop-button">⏹</button>
+                            <button id="next-button">⏭</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Videos -->
+                <div class="videos-section">
+                    <h2>Videos Disponibles</h2>
+                    <div class="videos-container" id="videos-container">
+                        <!-- Los videos se agregarán aquí con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuración ---        .custom-player-controls button {
+        const songs = [
+             {
+                id: 1,
+                title: "Maldito silencio - ACTO I - Escena 3",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/01_Cancion_Este-maldito-silencio.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
+            },
+            {
+                id: 2,
+                title: "Incertidumbre - ACTO I - Escena 4",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/02_Cancion_Incertidumbre.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incertidumbre.jpeg"
+            },
+            {
+                id: 3,
+                title: "Duelo - ACTO I - Escena 5",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Duelo.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Duelo-mp3-image.jpg"
+            },
+            {
+                id: 4,
+                title: "Mi ruido interior - ACTO I - Escena 6",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Mi-Ruido-Interior_V4.5.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Mi-Ruido-Interior_V4-5-mp3-image.jpg"
+            },
+            {
+                id: 5,
+                title: "Preguntas incómodas - ACTO II - Escena 7",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas-mp3-image.jpg"
+            },
+            {
+                id: 6,
+                title: "Síntomas invisibles - ACTO II - Escena 8",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Sintomas-invisibles.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Sintomas-invisibles-mp3-image.jpg"
+            },
+            {
+                id: 7,
+                title: "Resiliencia - ACTO II - Escena 9",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/07_Cancion_Resiliencia.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/resiliencia.jpeg"
+            },
+            {
+                id: 8,
+                title: "Encadenada - ACTO II - Escena 10",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Encadenada-RE.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/imagen.jpg"
+            },
+            {
+                id: 9,
+                title: "Super héroe - ACTO III - Escena 11",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe-mp3-image.jpg"
+            },
+            {
+                id: 10,
+                title: "Nuestro apoyo y fortaleza - ACTO III - Escena 12",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza-mp3-image.jpg"
+            },
+            {
+                id: 11,
+                title: "Baile de Pingüinos - ACTO III - Escena 13",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/11_Cancion_Pinguinos.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Pinguinos.jpeg"
+            },
+            {
+                id: 12,
+                title: "Esclerosis múltiple - ACTO I - Reserva 1",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Esclerosis-Multiple.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Esclerosis-Multiple-mp3-image.jpg"
+            },
+            {
+                id: 13,
+                title: "Esqueperoisis - ACTO I - Reserva 2",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Esqueperoisis.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/foto-esqueperoisis.jpeg"
+            },
+            {
+                id: 14,
+                title: "Mis miedos - ACTO I - Reserva 3",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos-mp3-image.jpg"
+            },
+            {
+                id: 15,
+                title: "Futuro incierto - ACTO I - Reserva 4",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Futuro-Incierto.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Captura-de-pantalla-2025-03-28-223302.png"
+            },
+            {
+                id: 16,
+                title: "Motivación - ACTO II - Reserva 1",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Motivacion.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Motivacion.jpg"
+            },
+            {
+                id: 17,
+                title: "Letmither - ACTO II - Reserva 2",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/El-Letmither-Re.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/image_b0544af3-f33d-4335-b01e-b6af50b63690.jpeg"
+            },
+             {
+                id: 18,
+                title: "Broteando - ACTO II - Reserva 3",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando-mp3-image.jpg"
+            },
+            {
+                id: 19,
+                title: "Otra ver desde cero - ACTO II - Reserva 4",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Otra-vez.-desde-cero.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/image_large_52cc8d03-277f-4126-bf39-baf3398c74ea.jpeg"
+            },
+            {
+                id: 20,
+                title: "Seguir adelante - ACTO III - Reserva 1",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.jpeg"
+            },
+            {
+                id: 21,
+                title: "Un nuevo estado - ACTO III - Reserva 2",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Un-nuevo-estado.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incapa.jpg"
+            },
+            
+            
+        ];
+
+        // Array de videos
+        const videos = [
+            {
+                id: 1,
+                title: "ACTO I",
+                description: "Inicio del musical - ACTO I",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/10/ACTO-I-MUSICAL-BAILE-DE-PINGUINOS.mp4",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/ACTO-I-BdP.jpg"
+            },
+            {
+                id: 2,
+                title: "ACTO II",
+                description: "Acto segundo del musical",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/10/ACTO-II-MUSICAL-BAILE-DE-PINGUINOS.mp4",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/videos/video-2-thumbnail.jpg"
+            },
+            {
+                id: 3,
+                title: "ACTO III",
+                description: "Acto tercero y final del musical",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/10/ACTO-III-MUSICAL-BAILE-DE-PINGUINOS.mp4",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/ACTO-III-BdP.jpg"
+            }
+        ];
+
+        // --- Elementos del DOM ---
+        const playlistElement = document.getElementById('playlist');
+        const audioPlayer = document.getElementById('audio-player');
+        const currentSongInfoElement = document.getElementById('current-song-info');
+        const progressBarContainer = document.getElementById('progress-bar-container');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeElement = document.getElementById('current-time');
+        const durationElement = document.getElementById('duration');
+
+        // Botones personalizados
+        const playPauseButton = document.getElementById('play-pause-button');
+        const stopButton = document.getElementById('stop-button');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        let currentSongIndex = 0;
+        let isPlaying = false; // Estado para saber si la música está sonando
+        let playingVideoId = null; // ID del video actualmente en reproducción
+
+        // --- Funciones ---
+
+        // Función para cargar una canción específica
+        function loadSong(index) {
+            if (index < 0 || index >= songs.length) {
+                console.error("Índice de canción fuera de rango.");
+                return;
+            }
+            const song = songs[index];
+            audioPlayer.src = song.url;
+            currentSongInfoElement.textContent = `${song.title} - ${song.artist}`;
+            currentSongIndex = index;
+            // Resetear la barra de progreso y tiempos
+            progressBar.style.width = '0%';
+            currentTimeElement.textContent = '0:00';
+            durationElement.textContent = '0:00';
+            updateActiveSongInList(index);
+            updatePlayPauseButtonIcon(); // Actualizar el icono del botón Play/Pause
+        }
+
+        // Función para actualizar la visualización de la canción activa en la lista
+        function updateActiveSongInList(index) {
+            const songItems = playlistElement.querySelectorAll('.song-item');
+            songItems.forEach((item, i) => {
+                const playButton = item.querySelector('.play-button');
+                if (i === index) {
+                    item.style.backgroundColor = '#2a2a2a'; // Resaltar canción activa
+                    // Cambia el icono del botón de la lista según el estado de reproducción
+                    if (!audioPlayer.paused) { // Si está sonando
+                        playButton.innerHTML = '❚❚'; // Mostrar pausa
+                    } else { // Si está pausada o detenida
+                        playButton.innerHTML = '▶'; // Mostrar play
+                    }
+                } else {
+                    item.style.backgroundColor = ''; // Restablecer estilo
+                    playButton.innerHTML = '▶'; // Poner play por defecto en las no seleccionadas
+                }
+            });
+        }
+
+        // Actualizar la barra de progreso y tiempos
+        function updateProgress() {
+            const { duration, currentTime } = audioPlayer;
+
+            if (isNaN(duration) || duration === 0) {
+                durationElement.textContent = '0:00';
+                return;
+            }
+
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+            const formatTime = (time) => {
+                const minutes = Math.floor(time / 60);
+                const seconds = Math.floor(time % 60);
+                const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+                return `${minutes}:${formattedSeconds}`;
+            };
+
+            currentTimeElement.textContent = formatTime(currentTime);
+            durationElement.textContent = formatTime(duration);
+        }
+
+        // Controlar Play/Pausa
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                isPlaying = true;
+            } else {
+                audioPlayer.pause();
+                isPlaying = false;
+            }
+            updatePlayPauseButtonIcon();
+            updateActiveSongInList(currentSongIndex); // Actualiza el icono en la lista también
+        }
+
+        // Controlar Stop
+        function stopAudio() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0; // Reinicia la reproducción al principio
+            isPlaying = false;
+            updatePlayPauseButtonIcon();
+            progressBar.style.width = '0%'; // Reinicia la barra de progreso
+            currentTimeElement.textContent = '0:00';
+            // Reiniciar el icono de play en la lista para la canción seleccionada
+            updateActiveSongInList(currentSongIndex);
+        }
+
+        // Ir a la siguiente canción
+        function nextSong() {
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0; // Volver al principio
+            }
+            loadSong(currentSongIndex);
+            audioPlayer.play(); // Siempre reproduce la siguiente automáticamente
+        }
+
+        // Ir a la canción anterior
+        function prevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1; // Ir al final
+            }
+            loadSong(currentSongIndex);
+            if (isPlaying) { // Si estaba sonando, que siga sonando la anterior
+                audioPlayer.play();
+            }
+        }
+
+        // Actualizar el icono del botón Play/Pause principal
+        function updatePlayPauseButtonIcon() {
+            if (audioPlayer.paused) {
+                playPauseButton.innerHTML = '▶'; // Icono de Play
+            } else {
+                playPauseButton.innerHTML = '❚❚'; // Icono de Pausa (dos barras verticales)
+            }
+        }
+
+        // Manejar el click en la barra de progreso
+        function seek(event) {
+            const rect = progressBarContainer.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const percentage = (offsetX / rect.width) * 100;
+            const newTime = (percentage / 100) * audioPlayer.duration;
+
+            if (!isNaN(newTime) && isFinite(newTime)) {
+                audioPlayer.currentTime = newTime;
+            }
+        }
+
+        // --- Funciones para videos ---
+
+        // Reproducir video
+        function playVideo(videoId) {
+            // Pausar todos los otros videos
+            stopAllVideos(videoId);
+            
+            const videoPlayer = document.getElementById(`video-player-${videoId}`);
+            const videoItem = document.getElementById(`video-${videoId}`);
+            
+            if (videoPlayer) {
+                videoPlayer.style.display = 'block';
+                videoPlayer.play();
+                playingVideoId = videoId;
+                videoItem.classList.add('playing');
+            }
+        }
+
+        // Pausar video
+        function pauseVideo(videoId) {
+            const videoPlayer = document.getElementById(`video-player-${videoId}`);
+            if (videoPlayer && !videoPlayer.paused) {
+                videoPlayer.pause();
+            }
+        }
+
+        // Detener video (pausa y reinicia)
+        function stopVideo(videoId) {
+            const videoPlayer = document.getElementById(`video-player-${videoId}`);
+            const videoItem = document.getElementById(`video-${videoId}`);
+            
+            if (videoPlayer) {
+                videoPlayer.pause();
+                videoPlayer.currentTime = 0;
+                videoPlayer.style.display = 'none';
+                videoItem.classList.remove('playing');
+                if (playingVideoId === videoId) {
+                    playingVideoId = null;
+                }
+            }
+        }
+
+        // Detener todos los videos excepto uno específico
+        function stopAllVideos(exceptVideoId = null) {
+            videos.forEach((video) => {
+                if (video.id !== exceptVideoId) {
+                    stopVideo(video.id);
+                }
+            });
+        }
+
+        // --- Inicialización ---
+
+        // Cargar la lista de canciones en la interfaz
+        songs.forEach((song, index) => {
+            const songItem = document.createElement('div');
+            songItem.classList.add('song-item');
+            // Añadimos la imagen en miniatura (thumbnail) si existe
+            // Si la thumbnail no existe o la URL está mal, no se mostrará nada.
+            const thumbnailHtml = song.thumbnail ? `<img src="${song.thumbnail}" alt="Miniatura de ${song.title}" class="song-thumbnail">` : '';
+
+            songItem.innerHTML = `
+                <div class="song-item-content">
+                    ${thumbnailHtml}
+                    <div class="song-info">
+                        <span class="song-title">${song.title}</span>
+                        <span class="song-artist">${song.artist}</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="play-button" data-index="${index}">▶</button>
+                </div>
+            `;
+            playlistElement.appendChild(songItem);
+        });
+
+        // Cargar los videos en la interfaz
+        const videosContainer = document.getElementById('videos-container');
+        videos.forEach((video) => {
+            const videoItem = document.createElement('div');
+            videoItem.classList.add('video-item');
+            videoItem.id = `video-${video.id}`;
+
+            const thumbnailHtml = video.thumbnail ? `<img src="${video.thumbnail}" alt="Miniatura de ${video.title}" class="video-thumbnail">` : '';
+
+            videoItem.innerHTML = `
+                ${thumbnailHtml}
+                <div class="video-info">
+                    <div class="video-title">${video.title}</div>
+                    <div class="video-description">${video.description}</div>
+                    <video class="video-player" id="video-player-${video.id}">
+                        <source src="${video.url}" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div class="video-controls">
+                        <button class="video-play-btn" data-video-id="${video.id}">▶ Play</button>
+                        <button class="video-pause-btn" data-video-id="${video.id}">❚❚ Pausa</button>
+                        <button class="video-stop-btn" data-video-id="${video.id}">⏹ Stop</button>
+                    </div>
+                </div>
+            `;
+            videosContainer.appendChild(videoItem);
+        });
+
+        // Cargar la primera canción al inicio (pero no reproducir automáticamente)
+        loadSong(currentSongIndex);
+
+        // --- Event Listeners ---
+
+        // Al hacer clic en una canción de la lista para cargarla y activar el play
+        playlistElement.addEventListener('click', (event) => {
+            const target = event.target;
+            // Si se hace clic en el botón de play de la lista
+            if (target.classList.contains('play-button')) {
+                const songItem = target.closest('.song-item');
+                const songIndex = Array.from(playlistElement.children).indexOf(songItem);
+                
+                // Si se hace clic en la canción que ya está cargada
+                if (currentSongIndex === songIndex) {
+                    togglePlayPause(); // Pausa o reanuda la canción actual
+                } else {
+                    loadSong(songIndex); // Carga la nueva canción
+                    togglePlayPause();   // Inicia la reproducción
+                }
+            }
+            // Si se hace clic en el texto de la canción para solo cargarla
+            else if (target.closest('.song-item') && !target.classList.contains('play-button')) {
+                const songItem = target.closest('.song-item');
+                const songIndex = Array.from(playlistElement.children).indexOf(songItem);
+                loadSong(songIndex); // Solo carga la canción, no la reproduce automáticamente
+            }
+        });
+
+        // Actualizar barra de progreso y tiempos mientras la canción se reproduce
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+
+        // Cuando la canción termina, pasar a la siguiente
+        audioPlayer.addEventListener('ended', nextSong);
+
+        // Manejar clics en la barra de progreso
+        progressBarContainer.addEventListener('click', seek);
+
+        // Asegurar que la duración se muestre una vez que esté disponible
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            updateProgress(); // Actualizar para mostrar duración inicial
+        });
+
+        // Eventos para los botones personalizados de los controles principales
+        playPauseButton.addEventListener('click', togglePlayPause);
+        stopButton.addEventListener('click', stopAudio);
+        prevButton.addEventListener('click', prevSong);
+        nextButton.addEventListener('click', nextSong);
+
+        // Eventos para los botones de videos
+        videosContainer.addEventListener('click', (event) => {
+            const target = event.target;
+            
+            if (target.classList.contains('video-play-btn')) {
+                const videoId = parseInt(target.dataset.videoId);
+                playVideo(videoId);
+            } else if (target.classList.contains('video-pause-btn')) {
+                const videoId = parseInt(target.dataset.videoId);
+                pauseVideo(videoId);
+            } else if (target.classList.contains('video-stop-btn')) {
+                const videoId = parseInt(target.dataset.videoId);
+                stopVideo(videoId);
+            }
+        });
+
+    </script>
+</body>
+</html>
