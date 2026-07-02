@@ -411,7 +411,7 @@
         const songs = [
              {
                 id: 1,
-                title: "Maldito silencio - ACTO I - Escena 3",
+                title: "Maldito silenci - ACTO I - Escena 3",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/01_Maldito-silencio_Acortado.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
