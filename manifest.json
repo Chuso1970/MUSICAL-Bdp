@@ -1,0 +1,10 @@
+{
+  "name": "Control Deck Sonoro",
+  "short_name": "Deck",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#22c55e",
+  "description": "Pequeña app de pads con sonidos distintos",
+  "icons": []
+}
