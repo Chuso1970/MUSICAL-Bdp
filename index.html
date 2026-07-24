@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Deck Sonoro</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --accent: #22c55e;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, #1d4ed8 0%, transparent 40%),
+        linear-gradient(135deg, #020617, #111827 55%, #0f172a);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    .deck {
+      width: min(960px, 94vw);
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 45px var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: #052e16;
+      background: #86efac;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 16px;
+    }
+
+    .pad {
+      border: 0;
+      padding: 20px 12px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #1f2937, #111827);
+      color: var(--text);
+      cursor: pointer;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 12px 22px rgba(0,0,0,.25);
+      transition: transform .08s ease, box-shadow .15s ease, filter .2s ease;
+      user-select: none;
+    }
+
+    .pad:hover {
+      filter: brightness(1.1);
+    }
+
+    .pad:active,
+    .pad.active {
+      transform: scale(0.97);
+      box-shadow: inset 0 0 0 2px rgba(34,197,94,.9), 0 0 0 4px rgba(34,197,94,.18);
+    }
+
+    .icon {
+      font-size: 2.2rem;
+    }
+
+    .label {
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .shortcut {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <div class="header">
+      <h1>Control Deck</h1>
+      <div class="badge">10 pads</div>
+    </div>
+
+    <section class="grid" id="pads"></section>
+    <div class="footer">Pulsa con ratón o usa las teclas 1-0 en el teclado.</div>
+  </main>
+
+  <script>
+    const padData = [
+      { icon: '🎵', label: 'Beat', shortcut: '1', type: 'sine', freq: 220 },
+      { icon: '🎹', label: 'Piano', shortcut: '2', type: 'triangle', freq: 330 },
+      { icon: '🔊', label: 'Bass', shortcut: '3', type: 'sawtooth', freq: 110 },
+      { icon: '🌩️', label: 'Thunder', shortcut: '4', type: 'square', freq: 165 },
+      { icon: '🪩', label: 'Dance', shortcut: '5', type: 'triangle', freq: 392 },
+      { icon: '🎚️', label: 'Sweep', shortcut: '6', type: 'sine', freq: 294 },
+      { icon: '✨', label: 'Spark', shortcut: '7', type: 'square', freq: 466 },
+      { icon: '💥', label: 'Impact', shortcut: '8', type: 'sawtooth', freq: 148 },
+      { icon: '🎶', label: 'Chime', shortcut: '9', type: 'triangle', freq: 523 },
+      { icon: '🎛️', label: 'Drop', shortcut: '0', type: 'square', freq: 88 }
+    ];
+
+    const pads = document.getElementById('pads');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playTone(config) {
+      const now = audioCtx.currentTime;
+      const oscillator = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      oscillator.type = config.type;
+      oscillator.frequency.setValueAtTime(config.freq, now);
+      oscillator.frequency.exponentialRampToValueAtTime(config.freq * 0.72, now + 0.24);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(900, now);
+      filter.Q.value = 1.5;
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+
+      oscillator.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      oscillator.start(now);
+      oscillator.stop(now + 0.55);
+    }
+
+    function createPads() {
+      padData.forEach((pad, index) => {
+        const button = document.createElement('button');
+        button.className = 'pad';
+        button.innerHTML = `
+          <div class="icon">${pad.icon}</div>
+          <div class="label">${pad.label}</div>
+          <div class="shortcut">Tecla ${pad.shortcut}</div>
+        `;
+
+        button.addEventListener('click', () => triggerPad(index, button));
+        pads.appendChild(button);
+      });
+    }
+
+    function triggerPad(index, button) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const pad = padData[index];
+      playTone(pad);
+
+      button.classList.add('active');
+      setTimeout(() => button.classList.remove('active'), 120);
+    }
+
+    createPads();
+
+    document.addEventListener('keydown', (event) => {
+      const keyMap = {
+        '1': 0, '2': 1, '3': 2, '4': 3, '5': 4,
+        '6': 5, '7': 6, '8': 7, '9': 8, '0': 9
+      };
+
+      const padIndex = keyMap[event.key];
+      if (padIndex !== undefined) {
+        const button = pads.children[padIndex];
+        if (button) triggerPad(padIndex, button);
+      }
+    });
+  </script>
+</body>
+</html>
