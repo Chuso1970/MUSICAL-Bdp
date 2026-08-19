@@ -34,7 +34,7 @@
             flex-shrink: 0;
             width: 300px;
             height: 300px;
-            background-image: url('https://todovaasalirbien.es/wp-content/uploads/2025/06/Chuso-Garcia_-Musica-Visible.png');
+            background-image: url('https://todovaasalirbien.es/wp-content/uploads/2026/03/Logo-Musical-llamame-pinguino.png');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -254,44 +254,8 @@
         }
 
         .video-player {
-            display: block; /* Mostrar siempre el video */
+            display: none;
             width: 100%;
-        }
-
-        /* Barra de progreso personalizada para videos */
-        .video-progress-container {
-            width: 100%;
-            height: 8px;
-            background-color: #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        .video-progress {
-            height: 100%;
-            background-color: #fe9103;
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-        .video-time-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 6px;
-        }
-        .video-fullscreen-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            padding: 6px 8px;
-            border-radius: 6px;
-        }
-        .video-fullscreen-btn:hover {
-            background-color: #f0f0f0;
-            color: #0d284a;
         }
 
         .video-controls {
@@ -409,88 +373,89 @@
     <script>
         // --- Configuración ---
         const songs = [
-            {
-                id: 1,
-                title: "Baile inicial - ACTO I - Escena 0",
-                artist: "Chuso García", 
+            
+        {
+                id: 0,
+                title: "Baile inicial - ACTO I - Escena 3",
+                artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/00_Pinguinos-disco-ENTRADA.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
-            },
-             {
+            },    
+        {
                 id: 1,
                 title: "Maldito silencio - ACTO I - Escena 3",
                 artist: "Chuso García e Iñaki Noblejas",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/01_Maldito-silencio_Acortado.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/02/Maldito-silencio-2_0-Cover.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
             },
             {
                 id: 2,
                 title: "Incertidumbre - ACTO I - Escena 4",
                 artist: "Chuso García e Iñaki Noblejas",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/02_Incertidumbre.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/02_Cancion_Incertidumbre.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incertidumbre.jpeg"
             },
             {
                 id: 3,
                 title: "Duelo - ACTO I - Escena 5",
                 artist: "Chuso García e Iñaki Noblejas",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/03_Duelo.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Duelo.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Duelo-mp3-image.jpg"
             },
             {
                 id: 4,
                 title: "Mi ruido interior - ACTO I - Escena 6",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/04_Mi-ruido-interior.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/02/Ruido-interior-2_0.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Mi-Ruido-Interior_V4-5-mp3-image.jpg"
             },
             {
                 id: 5,
                 title: "Preguntas incómodas - ACTO II - Escena 7",
                 artist: "Chuso García e Iñaki Noblejas",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/05_Preguntas-incomodas.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas-mp3-image.jpg"
             },
             {
                 id: 6,
                 title: "Síntomas invisibles - ACTO II - Escena 8",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/06_Sintomas-invisibles.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Sintomas-invisibles.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Sintomas-invisibles-mp3-image.jpg"
             },
             {
                 id: 7,
                 title: "Resiliencia - ACTO II - Escena 9",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/07_Resiliencia.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/07_Cancion_Resiliencia.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/resiliencia.jpeg"
             },
             {
                 id: 8,
                 title: "Encadenada - ACTO II - Escena 10",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/08_Encadenada.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Encadenada-RE.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/imagen.jpg"
             },
             {
                 id: 9,
                 title: "Super héroe - ACTO III - Escena 11",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/09_Super-heroe.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe-mp3-image.jpg"
             },
             {
                 id: 10,
                 title: "Nuestro apoyo y fortaleza - ACTO III - Escena 12",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/04/10_Nuestro-apoyo-y-fortaleza.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza-mp3-image.jpg"
             },
             {
                 id: 11,
                 title: "Todos para uno - ACTO III - Escena 13",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/11_Pinguinos-disco-FINAL-COROS.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/11_Pinguinos-disco-FINAL-COROS.mp3 ",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
             },
             {
@@ -502,23 +467,23 @@
             },
             {
                 id: 13,
-                title: "Esqueperoysis - ACTO I - Reserva 2",
+                title: "Esqueperoisis - ACTO I - Reserva 2",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Esqueperoysis.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Esqueperoisis.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/foto-esqueperoisis.jpeg"
             },
             {
                 id: 14,
                 title: "Mis miedos - ACTO I - Reserva 3",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Mis-miedos.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos-mp3-image.jpg"
             },
             {
                 id: 15,
                 title: "Futuro incierto - ACTO I - Reserva 4",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Un-Futuro-Incierto.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Futuro-Incierto.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Captura-de-pantalla-2025-03-28-223302.png"
             },
             {
@@ -539,7 +504,7 @@
                 id: 18,
                 title: "Broteando - ACTO II - Reserva 3",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Broteando.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando-mp3-image.jpg"
             },
             {
@@ -553,14 +518,14 @@
                 id: 20,
                 title: "Seguir adelante - ACTO III - Reserva 1",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Seguir-adelante.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.jpeg"
             },
             {
                 id: 21,
                 title: "Un nuevo estado - ACTO III - Reserva 2",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/Un-nuevo-estado.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Un-nuevo-estado.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incapa.jpg"
             },
             
@@ -573,21 +538,21 @@
                 id: 1,
                 title: "ACTO I",
                 description: "Inicio del musical - ACTO I",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/ACTO-I-ACORTADO-MUSICAL-LLAMAME-PINGUINO.mp4",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/03/ACTO-I-MUSICAL-LLAMAME-PINGUINO.mp4",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/03/caratula-acto-I.jpg"
             },
             {
                 id: 2,
                 title: "ACTO II",
                 description: "Acto segundo del musical",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/ACTO-II-ACORTADO-MUSICAL-LLAMAME-PINGUINO.mp4",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/03/ACTO-II-MUSICAL-LLAMAME-PINGUINO.mp4",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/03/caratula-acto-II.jpg"
             },
             {
                 id: 3,
                 title: "ACTO III",
                 description: "Acto tercero y final del musical",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/ACTO-III-ACORTADO-MUSICAL-LLAMAME-PINGUINO.mp4",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/03/ACTO-III-MUSICAL-LLAMAME-PINGUINO.mp4",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/03/caratula-acto-III.jpg"
             }
         ];
@@ -753,6 +718,7 @@
             const videoItem = document.getElementById(`video-${videoId}`);
             
             if (videoPlayer) {
+                videoPlayer.style.display = 'block';
                 videoPlayer.play();
                 playingVideoId = videoId;
                 videoItem.classList.add('playing');
@@ -775,6 +741,7 @@
             if (videoPlayer) {
                 videoPlayer.pause();
                 videoPlayer.currentTime = 0;
+                videoPlayer.style.display = 'none';
                 videoItem.classList.remove('playing');
                 if (playingVideoId === videoId) {
                     playingVideoId = null;
@@ -790,59 +757,6 @@
                 }
             });
         }
-
-                // --- Funciones auxiliares para la UI de videos ---
-                function formatTime(time) {
-                    const minutes = Math.floor(time / 60) || 0;
-                    const seconds = Math.floor(time % 60) || 0;
-                    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                }
-
-                function updateVideoProgress(videoId) {
-                    const videoPlayer = document.getElementById(`video-player-${videoId}`);
-                    const progress = document.getElementById(`video-progress-${videoId}`);
-                    const currentEl = document.getElementById(`video-current-${videoId}`);
-                    const durationEl = document.getElementById(`video-duration-${videoId}`);
-                    if (!videoPlayer || !progress) return;
-                    const duration = videoPlayer.duration;
-                    const currentTime = videoPlayer.currentTime;
-                    if (!isNaN(duration) && duration > 0) {
-                        const percent = (currentTime / duration) * 100;
-                        progress.style.width = `${percent}%`;
-                        currentEl.textContent = formatTime(currentTime);
-                        durationEl.textContent = formatTime(duration);
-                    }
-                }
-
-                function seekVideo(event, videoId) {
-                    const container = document.getElementById(`video-progress-container-${videoId}`);
-                    const videoPlayer = document.getElementById(`video-player-${videoId}`);
-                    if (!container || !videoPlayer) return;
-                    const rect = container.getBoundingClientRect();
-                    const offsetX = event.clientX - rect.left;
-                    const percentage = Math.min(Math.max(offsetX / rect.width, 0), 1);
-                    const newTime = percentage * videoPlayer.duration;
-                    if (!isNaN(newTime) && isFinite(newTime)) {
-                        videoPlayer.currentTime = newTime;
-                        updateVideoProgress(videoId);
-                    }
-                }
-
-                function toggleFullscreen(videoId) {
-                    const videoPlayer = document.getElementById(`video-player-${videoId}`);
-                    if (!videoPlayer) return;
-                    if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                    } else {
-                        // Poner el contenedor del video en fullscreen para incluir controles personalizados
-                        const videoItem = document.getElementById(`video-${videoId}`);
-                        if (videoItem && videoItem.requestFullscreen) {
-                            videoItem.requestFullscreen();
-                        } else if (videoPlayer.requestFullscreen) {
-                            videoPlayer.requestFullscreen();
-                        }
-                    }
-                }
 
         // --- Inicialización ---
 
@@ -883,61 +797,18 @@
                 <div class="video-info">
                     <div class="video-title">${video.title}</div>
                     <div class="video-description">${video.description}</div>
-                    <video class="video-player" id="video-player-${video.id}" controls>
+                    <video class="video-player" id="video-player-${video.id}">
                         <source src="${video.url}" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
-                    <div class="video-progress-container" id="video-progress-container-${video.id}">
-                        <div class="video-progress" id="video-progress-${video.id}"></div>
-                    </div>
-                    <div class="video-time-info">
-                        <span id="video-current-${video.id}">0:00</span>
-                        <span id="video-duration-${video.id}">0:00</span>
-                    </div>
                     <div class="video-controls">
                         <button class="video-play-btn" data-video-id="${video.id}">▶ Play</button>
                         <button class="video-pause-btn" data-video-id="${video.id}">❚❚ Pausa</button>
                         <button class="video-stop-btn" data-video-id="${video.id}">⏹ Stop</button>
-                        <button class="video-fullscreen-btn" data-video-id="${video.id}">⛶</button>
                     </div>
                 </div>
             `;
             videosContainer.appendChild(videoItem);
-            // Conectar listeners para progreso y fullscreen
-            const vPlayer = document.getElementById(`video-player-${video.id}`);
-            const vProgressContainer = document.getElementById(`video-progress-container-${video.id}`);
-            const vFullscreenBtn = videoItem.querySelector('.video-fullscreen-btn');
-
-            const thumbnailEl = videoItem.querySelector('.video-thumbnail');
-
-            if (vPlayer) {
-                // Ocultar miniatura cuando comienza la carga o hay buffering
-                vPlayer.addEventListener('loadstart', () => { if (thumbnailEl) thumbnailEl.style.display = 'none'; });
-                vPlayer.addEventListener('waiting', () => { if (thumbnailEl) thumbnailEl.style.display = 'none'; });
-
-                // Restaurar miniatura si ocurre un error o el elemento se vacía
-                vPlayer.addEventListener('error', () => { if (thumbnailEl) thumbnailEl.style.display = 'block'; });
-                vPlayer.addEventListener('emptied', () => { if (thumbnailEl) thumbnailEl.style.display = 'block'; });
-
-                vPlayer.addEventListener('timeupdate', () => updateVideoProgress(video.id));
-                vPlayer.addEventListener('loadedmetadata', () => {
-                    updateVideoProgress(video.id);
-                    if (thumbnailEl) thumbnailEl.style.display = 'none';
-                });
-                vPlayer.addEventListener('ended', () => {
-                    // Al terminar, resetear la barra
-                    updateVideoProgress(video.id);
-                    videoItem.classList.remove('playing');
-                });
-            }
-
-            if (vProgressContainer) {
-                vProgressContainer.addEventListener('click', (e) => seekVideo(e, video.id));
-            }
-
-            if (vFullscreenBtn) {
-                vFullscreenBtn.addEventListener('click', () => toggleFullscreen(video.id));
-            }
         });
 
         // Cargar la primera canción al inicio (pero no reproducir automáticamente)
@@ -992,7 +863,7 @@
         // Eventos para los botones de videos
         videosContainer.addEventListener('click', (event) => {
             const target = event.target;
-            
+
             if (target.classList.contains('video-play-btn')) {
                 const videoId = parseInt(target.dataset.videoId);
                 playVideo(videoId);
@@ -1004,7 +875,6 @@
                 stopVideo(videoId);
             }
         });
-
     </script>
 </body>
 </html>
