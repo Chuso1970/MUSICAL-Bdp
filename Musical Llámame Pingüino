@@ -409,6 +409,13 @@
     <script>
         // --- Configuración ---
         const songs = [
+            {
+                id: 1,
+                title: "Baile inicial - ACTO I - Escena 0",
+                artist: "Chuso García", 
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/00_Pinguinos-disco-ENTRADA.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
+            },
              {
                 id: 1,
                 title: "Maldito silencio - ACTO I - Escena 3",
@@ -481,9 +488,9 @@
             },
             {
                 id: 11,
-                title: "Baile de Pingüinos - ACTO III - Escena 13",
+                title: "Todos para uno - ACTO III - Escena 13",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/06/11_Llamame-Pinguino_Acortada.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/11_Pinguinos-disco-FINAL-COROS.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
             },
             {

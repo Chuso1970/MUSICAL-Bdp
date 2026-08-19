@@ -373,7 +373,8 @@
     <script>
         // --- Configuración ---
         const songs = [
-             {
+            
+            {
                 id: 1,
                 title: "Maldito silencio - ACTO I - Escena 3",
                 artist: "Chuso García e Iñaki Noblejas",
@@ -855,7 +856,7 @@
         // Eventos para los botones de videos
         videosContainer.addEventListener('click', (event) => {
             const target = event.target;
-            
+
             if (target.classList.contains('video-play-btn')) {
                 const videoId = parseInt(target.dataset.videoId);
                 playVideo(videoId);
@@ -867,7 +868,6 @@
                 stopVideo(videoId);
             }
         });
-
     </script>
 </body>
 </html>
