@@ -378,12 +378,12 @@
                 id: 0,
                 title: "Baile inicial - ACTO I - Escena 3",
                 artist: "Chuso García e Iñaki Noblejas",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/00_Pinguinos-disco-ENTRADA.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/01_Maldito-silencio-1a.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
             },    
         {
                 id: 1,
-                title: "Maldito silencio - ACTO I - Escena 3",
+                title: "Maldito silencio 1ª Parte - ACTO I - Escena 3",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/02/Maldito-silencio-2_0-Cover.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
@@ -394,6 +394,13 @@
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/02_Cancion_Incertidumbre.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incertidumbre.jpeg"
+            },
+               {
+                id: 2b,
+                title: "Maldito silencio 2ª Parte - ACTO I - Escena 3",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/01_Maldito-silencio-2a.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
             },
             {
                 id: 3,
@@ -430,6 +437,13 @@
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/07_Cancion_Resiliencia.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/resiliencia.jpeg"
             },
+               {
+                id: 7b,
+                title: "Maldito silencio 3ª Parte - ACTO I - Escena 3",
+                artist: "Chuso García e Iñaki Noblejas",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/01_Maldito-silencio-3a.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
+            },
             {
                 id: 8,
                 title: "Encadenada - ACTO II - Escena 10",
@@ -458,78 +472,7 @@
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/11_Pinguinos-disco-FINAL-COROS.mp3 ",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/04/Llamame-Pinguino-mp3-image.jpg"
             },
-            {
-                id: 12,
-                title: "Esclerosis múltiple - ACTO I - Reserva 1",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Esclerosis-Multiple.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Esclerosis-Multiple-mp3-image.jpg"
-            },
-            {
-                id: 13,
-                title: "Esqueperoisis - ACTO I - Reserva 2",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Esqueperoisis.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/foto-esqueperoisis.jpeg"
-            },
-            {
-                id: 14,
-                title: "Mis miedos - ACTO I - Reserva 3",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Rap_Mis-miedos-mp3-image.jpg"
-            },
-            {
-                id: 15,
-                title: "Futuro incierto - ACTO I - Reserva 4",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Futuro-Incierto.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Captura-de-pantalla-2025-03-28-223302.png"
-            },
-            {
-                id: 16,
-                title: "Motivación - ACTO II - Reserva 1",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Motivacion.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Motivacion.jpg"
-            },
-            {
-                id: 17,
-                title: "Letmither - ACTO II - Reserva 2",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/El-Letmither-Re.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/image_b0544af3-f33d-4335-b01e-b6af50b63690.jpeg"
-            },
-             {
-                id: 18,
-                title: "Broteando - ACTO II - Reserva 3",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Broteando-mp3-image.jpg"
-            },
-            {
-                id: 19,
-                title: "Otra ver desde cero - ACTO II - Reserva 4",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Otra-vez.-desde-cero.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/image_large_52cc8d03-277f-4126-bf39-baf3398c74ea.jpeg"
-            },
-            {
-                id: 20,
-                title: "Seguir adelante - ACTO III - Reserva 1",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Seguir-adelante.jpeg"
-            },
-            {
-                id: 21,
-                title: "Un nuevo estado - ACTO III - Reserva 2",
-                artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/Un-nuevo-estado.mp3",
-                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incapa.jpg"
-            },
-            
-            
+        
         ];
 
         // Array de videos
