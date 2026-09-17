@@ -434,7 +434,7 @@
                 id: 7,
                 title: "Resiliencia - ACTO II - Escena 9",
                 artist: "Chuso García",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/07_Cancion_Resiliencia.mp3",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/09/07_Resiliencia.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/resiliencia.jpeg"
             },
                {
@@ -528,7 +528,12 @@
                 return;
             }
             const song = songs[index];
+
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
             audioPlayer.src = song.url;
+            audioPlayer.load();
+
             currentSongInfoElement.textContent = `${song.title} - ${song.artist}`;
             currentSongIndex = index;
             // Resetear la barra de progreso y tiempos
@@ -609,12 +614,17 @@
 
         // Ir a la siguiente canción
         function nextSong() {
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                currentSongIndex = 0; // Volver al principio
-            }
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
             loadSong(currentSongIndex);
-            audioPlayer.play(); // Siempre reproduce la siguiente automáticamente
+            isPlaying = true;
+            const playPromise = audioPlayer.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    isPlaying = false;
+                    updatePlayPauseButtonIcon();
+                    updateActiveSongInList(currentSongIndex);
+                });
+            }
         }
 
         // Ir a la canción anterior

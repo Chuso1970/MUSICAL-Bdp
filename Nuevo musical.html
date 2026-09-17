@@ -577,7 +577,12 @@
                 return;
             }
             const song = songs[index];
+
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
             audioPlayer.src = song.url;
+            audioPlayer.load();
+
             currentSongInfoElement.textContent = `${song.title} - ${song.artist}`;
             currentSongIndex = index;
             // Resetear la barra de progreso y tiempos
@@ -658,12 +663,17 @@
 
         // Ir a la siguiente canción
         function nextSong() {
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                currentSongIndex = 0; // Volver al principio
-            }
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
             loadSong(currentSongIndex);
-            audioPlayer.play(); // Siempre reproduce la siguiente automáticamente
+            isPlaying = true;
+            const playPromise = audioPlayer.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    isPlaying = false;
+                    updatePlayPauseButtonIcon();
+                    updateActiveSongInList(currentSongIndex);
+                });
+            }
         }
 
         // Ir a la canción anterior
