@@ -481,14 +481,14 @@
                 id: 1,
                 title: "ACTO I",
                 description: "Inicio del musical - ACTO I",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/03/ACTO-I-MUSICAL-LLAMAME-PINGUINO.mp4",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/09/ACTO-I-MUSICAL-BAILE-DE-PINGUINOS.mp4",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/03/caratula-acto-I.jpg"
             },
             {
                 id: 2,
                 title: "ACTO II",
                 description: "Acto segundo del musical",
-                url: "https://todovaasalirbien.es/wp-content/uploads/2026/03/ACTO-II-MUSICAL-LLAMAME-PINGUINO.mp4",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/09/ACTO-II-MUSICAL-BAILE-DE-PINGUINOS.mp4",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/03/caratula-acto-II.jpg"
             }
         ];
