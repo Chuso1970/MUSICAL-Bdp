@@ -782,6 +782,17 @@
             }
         }
 
+        function fullscreenVideo(videoId) {
+            const videoPlayer = document.getElementById(`video-player-${videoId}`);
+            if (!videoPlayer) return;
+
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen().catch((error) => console.error("No se pudo activar la pantalla completa.", error));
+            } else if (videoPlayer.webkitEnterFullscreen) {
+                videoPlayer.webkitEnterFullscreen();
+            }
+        }
+
         // Detener video (pausa y reinicia)
         function stopVideo(videoId) {
             const videoPlayer = document.getElementById(`video-player-${videoId}`);
@@ -854,6 +865,7 @@
                         <button class="video-play-btn" data-video-id="${video.id}">▶ Play</button>
                         <button class="video-pause-btn" data-video-id="${video.id}">❚❚ Pausa</button>
                         <button class="video-stop-btn" data-video-id="${video.id}">⏹ Stop</button>
+                        <button class="video-fullscreen-btn" data-video-id="${video.id}" aria-label="Pantalla completa: ${video.title}">⛶ Pantalla completa</button>
                     </div>
                 </div>
             `;
@@ -922,9 +934,11 @@
             } else if (target.classList.contains('video-stop-btn')) {
                 const videoId = parseInt(target.dataset.videoId);
                 stopVideo(videoId);
+            } else if (target.classList.contains('video-fullscreen-btn')) {
+                const videoId = parseInt(target.dataset.videoId);
+                fullscreenVideo(videoId);
             }
         });
     </script>
 </body>
 </html>
-
