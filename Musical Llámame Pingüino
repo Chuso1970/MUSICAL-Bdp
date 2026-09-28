@@ -293,6 +293,74 @@
             color: #FFD700;
         }
 
+        .document-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #fe9103;
+            text-align: left;
+        }
+
+        .document-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .document-heading h2 {
+            color: #0d284a;
+            margin-bottom: 8px;
+        }
+
+        .document-heading p {
+            color: #666666;
+            margin-top: 0;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .document-link {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 5px;
+            background: #0d284a;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .document-link:hover,
+        .document-link:focus-visible {
+            background: #fe9103;
+            color: #222222;
+        }
+
+        .document-preview {
+            margin-top: 15px;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .document-preview h3,
+        .document-preview h4 {
+            color: #0d284a;
+        }
+
+        .document-preview li {
+            margin-bottom: 8px;
+        }
+
+        .document-preview li span {
+            color: #666666;
+        }
+
         /* Media query para pantallas pequeñas */
         @media (max-width: 768px) {
             .main-content-wrapper {
@@ -366,6 +434,41 @@
                         <!-- Los videos se agregarán aquí con JavaScript -->
                     </div>
                 </div>
+
+                <section class="document-section" aria-labelledby="document-title">
+                    <div class="document-heading">
+                        <div>
+                            <h2 id="document-title">Ficha del musical</h2>
+                            <p>Consulta el programa de canciones o descarga la ficha en formato Word.</p>
+                        </div>
+                        <div class="document-actions">
+                            <a class="document-link" href="https://todovaasalirbien.es/wp-content/uploads/2026/09/Guion-Musical_Llamame-Pinguino_ACORTADO.docx" target="_blank" rel="noopener">Ver documento</a>
+                            <a class="document-link" href="https://todovaasalirbien.es/wp-content/uploads/2026/09/Guion-Musical_Llamame-Pinguino_ACORTADO.docx">Descargar .doc</a>
+                        </div>
+                    </div>
+                    <div class="document-preview">
+                        <h3>Musical Llámame Pingüino</h3>
+                        <h4>Canciones</h4>
+                        <ol>
+                            <li>Baile inicial <span>· Acto I, escena 1 · Chuso García</span></li>
+                            <li>Maldito silencio, 1.ª parte <span>· Acto I, escena 4 · Chuso García e Iñaki Noblejas</span></li>
+                            <li>Incertidumbre <span>· Acto I, escena 5 · Chuso García</span></li>
+                            <li>Maldito silencio, 2.ª parte <span>· Acto I, escena 6 · Chuso García e Iñaki Noblejas</span></li>
+                            <li>Duelo <span>· Acto I, escena 7 · Chuso García e Iñaki Noblejas</span></li>
+                            <li>Mi ruido interior <span>· Acto I, escena 8 · Chuso García</span></li>
+                            <li>Preguntas incómodas <span>· Acto II, escena 9 · Chuso García e Iñaki Noblejas</span></li>
+                            <li>Síntomas invisibles <span>· Acto II, escena 10 · Chuso García</span></li>
+                            <li>Resiliencia <span>· Acto II, escena 11 · Chuso García</span></li>
+                            <li>Maldito silencio, 3.ª parte <span>· Acto II, escena 12 · Chuso García e Iñaki Noblejas</span></li>
+                            <li>Encadenada <span>· Acto II, escena 12 · Chuso García</span></li>
+                            <li>Super héroe <span>· Acto II, escena 14 · Chuso García</span></li>
+                            <li>Nuestro apoyo y fortaleza <span>· Acto II, escena 15 · Chuso García</span></li>
+                            <li>Todos para uno <span>· Acto II, escena 16 · Chuso García</span></li>
+                        </ol>
+                        <h4>Vídeos disponibles</h4>
+                        <p>Acto I · Acto II</p>
+                    </div>
+                </section>
             </div>
         </div>
     </div>

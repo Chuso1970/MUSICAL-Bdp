@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ficha del musical Llámame Pingüino</title>
+<style>
+body { font-family: Arial, sans-serif; color: #222; line-height: 1.5; }
+h1, h2 { color: #0d284a; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #b8c0c8; padding: 7px; text-align: left; }
+th { background: #eaf0f5; }
+</style>
+</head>
+<body>
+<h1>Musical Llámame Pingüino</h1>
+<p>Ficha del material musical y audiovisual disponible.</p>
+<h2>Canciones</h2>
+<table>
+<thead><tr><th>N.º</th><th>Canción</th><th>Acto y escena</th><th>Artista</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Baile inicial</td><td>Acto I, escena 1</td><td>Chuso García</td></tr>
+<tr><td>2</td><td>Maldito silencio, 1.ª parte</td><td>Acto I, escena 4</td><td>Chuso García e Iñaki Noblejas</td></tr>
+<tr><td>3</td><td>Incertidumbre</td><td>Acto I, escena 5</td><td>Chuso García</td></tr>
+<tr><td>4</td><td>Maldito silencio, 2.ª parte</td><td>Acto I, escena 6</td><td>Chuso García e Iñaki Noblejas</td></tr>
+<tr><td>5</td><td>Duelo</td><td>Acto I, escena 7</td><td>Chuso García e Iñaki Noblejas</td></tr>
+<tr><td>6</td><td>Mi ruido interior</td><td>Acto I, escena 8</td><td>Chuso García</td></tr>
+<tr><td>7</td><td>Preguntas incómodas</td><td>Acto II, escena 9</td><td>Chuso García e Iñaki Noblejas</td></tr>
+<tr><td>8</td><td>Síntomas invisibles</td><td>Acto II, escena 10</td><td>Chuso García</td></tr>
+<tr><td>9</td><td>Resiliencia</td><td>Acto II, escena 11</td><td>Chuso García</td></tr>
+<tr><td>10</td><td>Maldito silencio, 3.ª parte</td><td>Acto II, escena 12</td><td>Chuso García e Iñaki Noblejas</td></tr>
+<tr><td>11</td><td>Encadenada</td><td>Acto II, escena 12</td><td>Chuso García</td></tr>
+<tr><td>12</td><td>Super héroe</td><td>Acto II, escena 14</td><td>Chuso García</td></tr>
+<tr><td>13</td><td>Nuestro apoyo y fortaleza</td><td>Acto II, escena 15</td><td>Chuso García</td></tr>
+<tr><td>14</td><td>Todos para uno</td><td>Acto II, escena 16</td><td>Chuso García</td></tr>
+</tbody>
+</table>
+<h2>Vídeos</h2>
+<ul><li>Acto I</li><li>Acto II</li></ul>
+</body>
+</html>
