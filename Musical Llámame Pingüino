@@ -477,7 +477,7 @@
         // --- Configuración ---
         const songs = [
             
-        {
+         {
                 id: 0,
                 title: "Baile inicial - ACTO I - Escena 1",
                 artist: "Chuso García",
@@ -498,78 +498,85 @@
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/09/02_Cancion_Incertidumbre.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/incertidumbre.jpeg"
             },
+            {
+                id: 3,
+                title: "Mamá abrázame - ACTO I - Escena 6",
+                artist: "Chuso García",
+                url: "https://todovaasalirbien.es/wp-content/uploads/2026/11/mama-abrazame.mp3",
+                thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2026/11/a_Fotografia_cinematog.jpg"
+            },
                {
-                id: "2b",
+                id: "3b",
                 title: "Maldito silencio 2ª Parte - ACTO I - Escena 6",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/01_Maldito-silencio-2a.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
             },
             {
-                id: 3,
+                id: 4,
                 title: "Duelo - ACTO I - Escena 7",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/09/03_Duelo.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Duelo-mp3-image.jpg"
             },
             {
-                id: 4,
+                id: 5,
                 title: "Mi ruido interior - ACTO I - Escena 8",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/02/Ruido-interior-2_0.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Mi-Ruido-Interior_V4-5-mp3-image.jpg"
             },
             {
-                id: 5,
+                id: 6,
                 title: "Preguntas incómodas - ACTO II - Escena 9",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Preguntas-incomodas-mp3-image.jpg"
             },
             {
-                id: 6,
+                id: 7,
                 title: "Síntomas invisibles - ACTO II - Escena 10",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/10/06_Sintomas-invisibles-nueva-recor.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Sintomas-invisibles-mp3-image.jpg"
             },
             {
-                id: 7,
+                id: 8,
                 title: "Resiliencia - ACTO II - Escena 11",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/09/07_Resiliencia.mp3 ",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/resiliencia.jpeg"
             },
                {
-                id: "7b",
+                id: "8b",
                 title: "Maldito silencio 3ª Parte - ACTO II - Escena 12",
                 artist: "Chuso García e Iñaki Noblejas",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/01_Maldito-silencio-3a.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/09/pares-ese-maltido-silencio.jpg"
             },
             {
-                id: 8,
+                id: 9,
                 title: "Encadenada - ACTO II - Escena 12",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Encadenada-RE.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/imagen.jpg"
             },
             {
-                id: 9,
+                id: 10,
                 title: "Super héroe - ACTO II - Escena 14",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Superheroe-mp3-image.jpg"
             },
             {
-                id: 10,
+                id: 11,
                 title: "Nuestro apoyo y fortaleza - ACTO II - Escena 15",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza.mp3",
                 thumbnail: "https://todovaasalirbien.es/wp-content/uploads/2025/06/Nuestro-apoyo-y-fortaleza-mp3-image.jpg"
             },
             {
-                id: 11,
+                id: 12,
                 title: "Todos para uno - ACTO II - Escena 16",
                 artist: "Chuso García",
                 url: "https://todovaasalirbien.es/wp-content/uploads/2026/08/11_Pinguinos-disco-FINAL-COROS.mp3 ",
